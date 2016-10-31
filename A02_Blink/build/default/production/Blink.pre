@@ -1,0 +1,17 @@
+
+# 1 "Blink.asm"
+; *******************************************************************
+; PICkit 2 Lesson 2 - "Blink"
+;
+; First lesson showed how to make an LED turn on,
+; Now we'll look at how to make it blink.  Delay loops are necessary
+; to slow down the on and off commands so they are visible to humans.
+;
+; *******************************************************************
+; * See 44-pin Demo Board User's Guide for Lesson Information    *
+; *******************************************************************
+
+# 1 "prologue.inc"
+; enables use of register and bit names from the datasheet
+; consistes of
+; SymbolicName EQU NumericalValue ; equates symbolic names to appropriate bit patterns
