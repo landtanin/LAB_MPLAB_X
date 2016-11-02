@@ -1,4 +1,4 @@
-MPASM 5.68  /USERS/MAC/DOCUMENTS/LAB_MPLAB_X   10-31-2016  13:11:39         PAGE  1
+MPASM 5.68  /USERS/MAC/DOCUMENTS/LAB_MPLAB_X   11-2-2016  20:30:16         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -57,7 +57,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00027 ; starting address in the program memory for the following code
 0000                  00028      org 0
                       00013 
-MPASM 5.68  /USERS/MAC/DOCUMENTS/LAB_MPLAB_X   10-31-2016  13:11:39         PAGE  2
+MPASM 5.68  /USERS/MAC/DOCUMENTS/LAB_MPLAB_X   11-2-2016  20:30:16         PAGE  2
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -112,7 +112,7 @@ Message[302]: Register in operand not in bank 0.  Ensure that bank bits are corr
                       00057 
                       00058 ; required by the end of file
                       00059      end
-MPASM 5.68  /USERS/MAC/DOCUMENTS/LAB_MPLAB_X   10-31-2016  13:11:39         PAGE  3
+MPASM 5.68  /USERS/MAC/DOCUMENTS/LAB_MPLAB_X   11-2-2016  20:30:16         PAGE  3
 
 
 SYMBOL TABLE
@@ -171,7 +171,7 @@ BRG6                              00000006
 BRG7                              00000007
 BRG8                              00000000
 BRG9                              00000001
-MPASM 5.68  /USERS/MAC/DOCUMENTS/LAB_MPLAB_X   10-31-2016  13:11:39         PAGE  4
+MPASM 5.68  /USERS/MAC/DOCUMENTS/LAB_MPLAB_X   11-2-2016  20:30:16         PAGE  4
 
 
 SYMBOL TABLE
@@ -230,7 +230,7 @@ CHS0                              00000002
 CHS1                              00000003
 CHS2                              00000004
 CHS3                              00000005
-MPASM 5.68  /USERS/MAC/DOCUMENTS/LAB_MPLAB_X   10-31-2016  13:11:39         PAGE  5
+MPASM 5.68  /USERS/MAC/DOCUMENTS/LAB_MPLAB_X   11-2-2016  20:30:16         PAGE  5
 
 
 SYMBOL TABLE
@@ -289,7 +289,7 @@ INTE                              00000004
 INTEDG                            00000006
 INTF                              00000001
 IOCB                              00000096
-MPASM 5.68  /USERS/MAC/DOCUMENTS/LAB_MPLAB_X   10-31-2016  13:11:39         PAGE  6
+MPASM 5.68  /USERS/MAC/DOCUMENTS/LAB_MPLAB_X   11-2-2016  20:30:16         PAGE  6
 
 
 SYMBOL TABLE
@@ -348,7 +348,7 @@ P1M0                              00000006
 P1M1                              00000007
 PCL                               00000002
 PCLATH                            0000000A
-MPASM 5.68  /USERS/MAC/DOCUMENTS/LAB_MPLAB_X   10-31-2016  13:11:39         PAGE  7
+MPASM 5.68  /USERS/MAC/DOCUMENTS/LAB_MPLAB_X   11-2-2016  20:30:16         PAGE  7
 
 
 SYMBOL TABLE
@@ -407,7 +407,7 @@ RB7                               00000007
 RBIE                              00000003
 RBIF                              00000000
 RC0                               00000000
-MPASM 5.68  /USERS/MAC/DOCUMENTS/LAB_MPLAB_X   10-31-2016  13:11:39         PAGE  8
+MPASM 5.68  /USERS/MAC/DOCUMENTS/LAB_MPLAB_X   11-2-2016  20:30:16         PAGE  8
 
 
 SYMBOL TABLE
@@ -466,7 +466,7 @@ SRCON                             00000185
 SREN                              00000005
 SSPADD                            00000093
 SSPBUF                            00000013
-MPASM 5.68  /USERS/MAC/DOCUMENTS/LAB_MPLAB_X   10-31-2016  13:11:39         PAGE  9
+MPASM 5.68  /USERS/MAC/DOCUMENTS/LAB_MPLAB_X   11-2-2016  20:30:16         PAGE  9
 
 
 SYMBOL TABLE
@@ -525,7 +525,7 @@ TMR2IE                            00000001
 TMR2IF                            00000001
 TMR2ON                            00000002
 TOUTPS0                           00000003
-MPASM 5.68  /USERS/MAC/DOCUMENTS/LAB_MPLAB_X   10-31-2016  13:11:39         PAGE 10
+MPASM 5.68  /USERS/MAC/DOCUMENTS/LAB_MPLAB_X   11-2-2016  20:30:16         PAGE 10
 
 
 SYMBOL TABLE
@@ -584,7 +584,7 @@ TUN4                              00000004
 TX8_9                             00000006
 TX9                               00000006
 TX9D                              00000000
-MPASM 5.68  /USERS/MAC/DOCUMENTS/LAB_MPLAB_X   10-31-2016  13:11:39         PAGE 11
+MPASM 5.68  /USERS/MAC/DOCUMENTS/LAB_MPLAB_X   11-2-2016  20:30:16         PAGE 11
 
 
 SYMBOL TABLE
@@ -643,7 +643,7 @@ _BOREN_SBODEN                     00003DFF
 _BOR_NSLEEP                       00003EFF
 _BOR_OFF                          00003CFF
 _BOR_ON                           00003FFF
-MPASM 5.68  /USERS/MAC/DOCUMENTS/LAB_MPLAB_X   10-31-2016  13:11:39         PAGE 12
+MPASM 5.68  /USERS/MAC/DOCUMENTS/LAB_MPLAB_X   11-2-2016  20:30:16         PAGE 12
 
 
 SYMBOL TABLE
@@ -702,7 +702,7 @@ _WRT_HALF                         000039FF
 _WRT_OFF                          00003FFF
 _XT_OSC                           00003FF9
 __16F887                          00000001
-MPASM 5.68  /USERS/MAC/DOCUMENTS/LAB_MPLAB_X   10-31-2016  13:11:39         PAGE 13
+MPASM 5.68  /USERS/MAC/DOCUMENTS/LAB_MPLAB_X   11-2-2016  20:30:16         PAGE 13
 
 
 MEMORY USAGE MAP ('X' = Used,  '-' = Unused)
