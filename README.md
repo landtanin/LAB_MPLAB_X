@@ -1,1 +1,2 @@
-# This is for lesson 4-12
+# Lesson 1-3 are done in A01_HelloWorld
+
