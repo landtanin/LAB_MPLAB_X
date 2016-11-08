@@ -27,14 +27,19 @@ Start:
      movlw     0xFF
      movwf     TRISA          ; Make PortA all input
 
-;	 direction for PORTD - 0 - outpiuts
-     clrf      TRISD          ; Make PortD all output
+;	 direction for PORTD - 0 - outputs
+;     clrf      TRISD          ; Make PortD all output
+     movlw     0x00
+     movwf     TRISD          ; Make PortA all input
 
 ; 	 initialising the ADC 
 ;		init ADCON1
      movlw     0x00           ; Left Justified, Vdd-Vss referenced
      movwf     ADCON1
 ;		init ANSEL
+     
+     ; end Bank1
+     
      bsf       STATUS,RP1     ; select Register Bank 3
      movlw     0xFF           ; we want all Port A pins Analog
      movwf     ANSEL
