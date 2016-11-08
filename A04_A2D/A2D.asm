@@ -28,25 +28,47 @@ Start:
      movwf     TRISA          ; Make PortA all input
 
 ;	 direction for PORTD - 0 - outputs
-;     clrf      TRISD          ; Make PortD all output
-     movlw     0x00
-     movwf     TRISD          ; Make PortA all input
-
+; -----------there're 2 ways to do this-----------
+; 1. a hard way
+;     movlw     0x00
+;     movwf     TRISD          ; Make PortA all input
+; 2. a faster way, clear the whole register
+     clrf      TRISD          ; Make PortD all output
+; -----------choose 1 from 2-----------------------------
+     
 ; 	 initialising the ADC 
 ;		init ADCON1
      movlw     0x00           ; Left Justified, Vdd-Vss referenced
-     movwf     ADCON1
-;		init ANSEL
+     movwf     ADCON1	      ; Setting the result to Left Justified (bit 7, ADFM = 0) means the 8 Most Significant bits 
+			      ; and read from ADRESH and the 2 Least Significant bits 
+			      ; are read from bits 7 and 6 of ADRESL.
+			      
+			      ; bit<4:5>, VCFG0:VCFG1, to 0 means we choose Vdd-Vss
+			      ; if it's 1 means we chhose Vref+ - Vref-
      
-     ; end Bank1
+; -----------------end Bank1--------------------
+
+			      
+; -----------------start Bank3--------------------
+;		init ANSEL
      
      bsf       STATUS,RP1     ; select Register Bank 3
      movlw     0xFF           ; we want all Port A pins Analog
-     movwf     ANSEL
-;		init ADCON0
+     movwf     ANSEL	      ; The ANSEL register (Register 3-3) is used to configure the Input mode of an I/O pin to analog. 
+			      ; Setting the appropriate ANSEL bit high will cause all digital reads on the pin to be read as ?0? 
+			      ; and allow analog functions on the pin to operate correctly.
+			      
+; -----------------end Bank3--------------------
+			     
+; -----------------start Bank0--------------------
+
      bcf       STATUS,RP0     ; back to Register Bank 0
      bcf       STATUS,RP1
-     movlw     0x41			  ; configure A2D for Fosc/8, Channel 0 (RA0), and turn on the A2D module
+     
+;   init ADCON0
+     movlw     0x41			  ; configure A2D for Fosc/8 (bit7=0, bit6=1), 
+					  ; Channel 0 (RA0) (bit<5:2> = 0000) , 
+					  ; and turn on the A2D module (bit 0 = 0)
      movwf     ADCON0         
 
 
@@ -61,11 +83,12 @@ MainLoop:
      nop                      ; wait 1uS
      bsf       ADCON0,GO_DONE ; start conversion
 ;	 until conversion is complete
-     btfss     ADCON0,GO_DONE ; this bit will change to zero when the conversion is complete
-     goto      $-1
+     btfss     ADCON0,GO_DONE ; this bit will change to zero when the conversion is complete - IF STATEMENT!!!
+			      ; BTFSS = Bit Test f, Skip if Set
+     goto      $-1	      ; ?????
 
-     movf      ADRESH,w       ; Copy the display to the LEDs
-
+     ; Copy the display to the LEDs
+     movf      ADRESH,w       
      movwf     PORTD
 
      goto      MainLoop

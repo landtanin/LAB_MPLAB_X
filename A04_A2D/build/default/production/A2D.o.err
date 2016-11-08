@@ -1,4 +1,4 @@
 Message[302] /Users/Mac/Documents/LAB_MPLAB_X/A04_A2D/A2D.asm 28 : Register in operand not in bank 0.  Ensure that bank bits are correct.
-Message[302] /Users/Mac/Documents/LAB_MPLAB_X/A04_A2D/A2D.asm 33 : Register in operand not in bank 0.  Ensure that bank bits are correct.
-Message[302] /Users/Mac/Documents/LAB_MPLAB_X/A04_A2D/A2D.asm 38 : Register in operand not in bank 0.  Ensure that bank bits are correct.
-Message[302] /Users/Mac/Documents/LAB_MPLAB_X/A04_A2D/A2D.asm 45 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] /Users/Mac/Documents/LAB_MPLAB_X/A04_A2D/A2D.asm 36 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] /Users/Mac/Documents/LAB_MPLAB_X/A04_A2D/A2D.asm 42 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] /Users/Mac/Documents/LAB_MPLAB_X/A04_A2D/A2D.asm 57 : Register in operand not in bank 0.  Ensure that bank bits are correct.
