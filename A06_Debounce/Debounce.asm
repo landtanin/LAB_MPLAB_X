@@ -57,6 +57,7 @@ MainLoop:
      btfsc     LastStableState,0	   ; if release (reads 1), not skip, goto LookingForUp
      goto      LookingForUp		   ; two different pieces of code for two switch states
 
+;----------CHECK BOUNCE???
 LookingForDown:
      ; clrw - clear W
      clrw                          ; assume it's not, so clear
@@ -71,18 +72,21 @@ LookingForUp:
      incf      Counter,w
      movwf     Counter
 
+;----------END CHECK BOUNCE
 EndDebounce:
      movf      Counter,w           ; have we seen 5 in a row?
      ; xorlw - Exclusive OR literal with W
      ; xor - same, 0, diff, 1
      xorlw     5
-     btfss     STATUS,Z     
+     btfss     STATUS,Z   ; Z = 1 if the result is zero,
+			  ; Z = 0 if the result is not zero.
      goto      Delay1mS
      
+     ; It will enter this loop only when counter=5
      ; comf - Complement f
-     comf      LastStableState,f   ; after 5 straight, reverse the direction
+     comf      LastStableState,f   ; after 5 straight, reverse the direction TOGGLE!!!
      clrf      Counter		   ; reset counter
-     btfsc     LastStableState,0   ; Was it a key-down press?
+     btfss     LastStableState,0   ; Was it a key-down press?
      goto      Delay1mS            ; no: take no action
      
      incf      Display,f           ; if it's the down direction, 
