@@ -1,0 +1,6 @@
+Message[302] /Users/Mac/Documents/LAB_MPLAB_X/A06_Bounce/Bounce.asm 26 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] /Users/Mac/Documents/LAB_MPLAB_X/A06_Bounce/Bounce.asm 28 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] /Users/Mac/Documents/LAB_MPLAB_X/A06_Bounce/Bounce.asm 31 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] /Users/Mac/Documents/LAB_MPLAB_X/A06_Bounce/Bounce.asm 35 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] /Users/Mac/Documents/LAB_MPLAB_X/A06_Bounce/Bounce.asm 37 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] /Users/Mac/Documents/LAB_MPLAB_X/A06_Bounce/Bounce.asm 67 : Using default destination of 1 (file).

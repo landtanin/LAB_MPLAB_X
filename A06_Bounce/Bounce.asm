@@ -13,8 +13,8 @@
 #include "prologue.inc"
 
      cblock     0x20
-Delay               ; Assign an address to label Delay1
-Display             ; define a variable to hold the diplay
+;Delay               ; Assign an address to label Delay1
+;Display             ; define a variable to hold the diplay
 LastState			; what was the state before this pressing
      endc
 
@@ -32,9 +32,10 @@ Start:
 
      bsf       STATUS,RP1          ; select Register Bank 3
      movlw     0x1F                
-     movwf     ANSEL               ; PortA pins are all analog, PortE pins are digital
+     movwf     ANSEL               ; PortA pins are all analog(0-4), PortE pins are digital(5-7)
      movlw     0x00
      movwf     ANSELH              ; PortB pins are digitial (important as RB0 is switch)
+     
      bcf       STATUS,RP0          ; address Register Bank 0
      bcf       STATUS,RP1
  
@@ -48,19 +49,30 @@ Start:
 ;---------------------------------------------------------------------
 ;* superloop - do forever 
 MainLoop:
-
-     btfsc     PORTB,RB0			; switch is pressed?
+    ; btfsc bit test skip if clear
+     btfsc     PORTB,RB0			; switch is pressed(reads 0)? If it's release(reads 1), it'll goto Released
 	 goto	   Released				; no - it is released
-	 ; switch is pressed now
-	 bcf	   LastState,0			; set 0 (pressed) to the LastState
+	 
+	 ; switch is pressed now (reads 0, skip goto Realeased) 
+	 bcf	   LastState,0			; set 0 (pressed) to the LastState, assign state from RB0 to "LastState"
 	 goto	   MainLoop
+	 
 Released
 	 btfsc	   LastState,0			; what was the state before the release?	
 	 goto	   MainLoop				; released - nothing changed - continue the superloop
-	 incf	   PORTD				; was pressed before - increment the display
-	 bsf	   LastState,0			; set 1 (released) to the LastState
+	 
+; was pressed before - increment the display
+; 2 ways to do this
+; 1 - smart way, incf - increment file register
+	 incf	   PORTD				
+; 2 - simple way
+;	 addlw	    1
+;	 movwf	    PORTD
+; ----choose 1 from 2---------
+	 
+	 bsf	   LastState,0			; set 1 (released) to the LastState, assign state from RB0 to "LastState"
 
-     goto      MainLoop
+	 goto      MainLoop
 ;* end of the superloop 
 ;---------------------------------------------------------------------
 

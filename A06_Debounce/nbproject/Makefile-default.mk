@@ -19,7 +19,7 @@ endif
 endif
 
 # Environment
-MKDIR=gnumkdir -p
+MKDIR=mkdir -p
 RM=rm -f 
 MV=mv 
 CP=cp 
@@ -36,6 +36,12 @@ IMAGE_TYPE=production
 OUTPUT_SUFFIX=hex
 DEBUGGABLE_SUFFIX=cof
 FINAL_IMAGE=dist/${CND_CONF}/${IMAGE_TYPE}/A06_Debounce.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
+endif
+
+ifeq ($(COMPARE_BUILD), true)
+COMPARISON_BUILD=
+else
+COMPARISON_BUILD=
 endif
 
 # Object Directory
@@ -72,7 +78,10 @@ LDLIBSOPTIONS=
 FIXDEPS=fixDeps
 
 .build-conf:  ${BUILD_SUBPROJECTS}
-	${MAKE} ${MAKE_OPTIONS} -f nbproject/Makefile-default.mk dist/${CND_CONF}/${IMAGE_TYPE}/A06_Debounce.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
+ifneq ($(INFORMATION_MESSAGE), )
+	@echo $(INFORMATION_MESSAGE)
+endif
+	${MAKE}  -f nbproject/Makefile-default.mk dist/${CND_CONF}/${IMAGE_TYPE}/A06_Debounce.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
 
 MP_PROCESSOR_OPTION=16f887
 MP_LINKER_DEBUG_OPTION=-r=ROM@0x1F00:0x1FFE -r=RAM@SHARE:0x70:0x70 -r=RAM@SHARE:0xF0:0xF0 -r=RAM@SHARE:0x170:0x170 -r=RAM@GPR:0x1E5:0x1EF -r=RAM@SHARE:0x1F0:0x1F0
@@ -80,27 +89,27 @@ MP_LINKER_DEBUG_OPTION=-r=ROM@0x1F00:0x1FFE -r=RAM@SHARE:0x70:0x70 -r=RAM@SHARE:
 # Rules for buildStep: assemble
 ifeq ($(TYPE_IMAGE), DEBUG_RUN)
 ${OBJECTDIR}/Debounce.o: Debounce.asm  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} ${OBJECTDIR} 
+	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/Debounce.o.d 
 	@${RM} ${OBJECTDIR}/Debounce.o 
-	@${FIXDEPS} dummy.d -e "Z:/LAB_MPLAB_X/LAB_MPLAB_X/A06_Debounce/Debounce.ERR" $(SILENT) -c ${MP_AS} $(MP_EXTRA_AS_PRE) -d__DEBUG -d__MPLAB_DEBUGGER_PICKIT2=1 -q -p$(MP_PROCESSOR_OPTION)  $(ASM_OPTIONS)   \"Z:/LAB_MPLAB_X/LAB_MPLAB_X/A06_Debounce/Debounce.asm\" 
-	@${MV}  Z:/LAB_MPLAB_X/LAB_MPLAB_X/A06_Debounce/Debounce.O ${OBJECTDIR}/Debounce.o
-	@${MV}  Z:/LAB_MPLAB_X/LAB_MPLAB_X/A06_Debounce/Debounce.ERR ${OBJECTDIR}/Debounce.o.err
-	@${MV}  Z:/LAB_MPLAB_X/LAB_MPLAB_X/A06_Debounce/Debounce.LST ${OBJECTDIR}/Debounce.o.lst
-	@${RM}  Z:/LAB_MPLAB_X/LAB_MPLAB_X/A06_Debounce/Debounce.HEX 
+	@${FIXDEPS} dummy.d -e "/Users/Mac/Documents/LAB_MPLAB_X/A06_Debounce/Debounce.ERR" $(SILENT) -c ${MP_AS} $(MP_EXTRA_AS_PRE) -d__DEBUG -d__MPLAB_DEBUGGER_PICKIT2=1 -q -p$(MP_PROCESSOR_OPTION) -u  $(ASM_OPTIONS)    \\\"/Users/Mac/Documents/LAB_MPLAB_X/A06_Debounce/Debounce.asm\\\" 
+	@${MV}  /Users/Mac/Documents/LAB_MPLAB_X/A06_Debounce/Debounce.O ${OBJECTDIR}/Debounce.o
+	@${MV}  /Users/Mac/Documents/LAB_MPLAB_X/A06_Debounce/Debounce.ERR ${OBJECTDIR}/Debounce.o.err
+	@${MV}  /Users/Mac/Documents/LAB_MPLAB_X/A06_Debounce/Debounce.LST ${OBJECTDIR}/Debounce.o.lst
+	@${RM}  /Users/Mac/Documents/LAB_MPLAB_X/A06_Debounce/Debounce.HEX 
 	@${DEP_GEN} -d "${OBJECTDIR}/Debounce.o"
 	@${FIXDEPS} "${OBJECTDIR}/Debounce.o.d" $(SILENT) -rsi ${MP_AS_DIR} -c18 
 	
 else
 ${OBJECTDIR}/Debounce.o: Debounce.asm  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} ${OBJECTDIR} 
+	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/Debounce.o.d 
 	@${RM} ${OBJECTDIR}/Debounce.o 
-	@${FIXDEPS} dummy.d -e "Z:/LAB_MPLAB_X/LAB_MPLAB_X/A06_Debounce/Debounce.ERR" $(SILENT) -c ${MP_AS} $(MP_EXTRA_AS_PRE) -q -p$(MP_PROCESSOR_OPTION)  $(ASM_OPTIONS)   \"Z:/LAB_MPLAB_X/LAB_MPLAB_X/A06_Debounce/Debounce.asm\" 
-	@${MV}  Z:/LAB_MPLAB_X/LAB_MPLAB_X/A06_Debounce/Debounce.O ${OBJECTDIR}/Debounce.o
-	@${MV}  Z:/LAB_MPLAB_X/LAB_MPLAB_X/A06_Debounce/Debounce.ERR ${OBJECTDIR}/Debounce.o.err
-	@${MV}  Z:/LAB_MPLAB_X/LAB_MPLAB_X/A06_Debounce/Debounce.LST ${OBJECTDIR}/Debounce.o.lst
-	@${RM}  Z:/LAB_MPLAB_X/LAB_MPLAB_X/A06_Debounce/Debounce.HEX 
+	@${FIXDEPS} dummy.d -e "/Users/Mac/Documents/LAB_MPLAB_X/A06_Debounce/Debounce.ERR" $(SILENT) -c ${MP_AS} $(MP_EXTRA_AS_PRE) -q -p$(MP_PROCESSOR_OPTION) -u  $(ASM_OPTIONS)    \\\"/Users/Mac/Documents/LAB_MPLAB_X/A06_Debounce/Debounce.asm\\\" 
+	@${MV}  /Users/Mac/Documents/LAB_MPLAB_X/A06_Debounce/Debounce.O ${OBJECTDIR}/Debounce.o
+	@${MV}  /Users/Mac/Documents/LAB_MPLAB_X/A06_Debounce/Debounce.ERR ${OBJECTDIR}/Debounce.o.err
+	@${MV}  /Users/Mac/Documents/LAB_MPLAB_X/A06_Debounce/Debounce.LST ${OBJECTDIR}/Debounce.o.lst
+	@${RM}  /Users/Mac/Documents/LAB_MPLAB_X/A06_Debounce/Debounce.HEX 
 	@${DEP_GEN} -d "${OBJECTDIR}/Debounce.o"
 	@${FIXDEPS} "${OBJECTDIR}/Debounce.o.d" $(SILENT) -rsi ${MP_AS_DIR} -c18 
 	
@@ -134,7 +143,7 @@ endif
 # Enable dependency checking
 .dep.inc: .depcheck-impl
 
-DEPFILES=$(shell mplabwildcard ${POSSIBLE_DEPFILES})
+DEPFILES=$(shell "${PATH_TO_IDE_BIN}"mplabwildcard ${POSSIBLE_DEPFILES})
 ifneq (${DEPFILES},)
 include ${DEPFILES}
 endif

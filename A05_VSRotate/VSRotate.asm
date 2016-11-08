@@ -69,14 +69,14 @@ MainLoop:
      
      ; Copy the display to the LEDs
      movf      ADRESH,w            
-;     addlw     1		   ; add literal and W 
+     addlw     1		   ; add literal and W 
      movwf     Delay2		   ; *** this is how the potentiometer take control of the delay 
 
 ; delay before rotate
 A2DDelayLoop:
      decfsz    Delay1,f            ; Waste time.  
-     goto      A2DDelayLoop        ; This is the case of highest voltage value, The Inner loop takes 3 instructions per loop * 256 loops = 768 instructions
-     decfsz    Delay2,f            ; The outer loop takes and additional 3 instructions per lap * 256 loops
+     goto      A2DDelayLoop        ; The Inner loop takes 3 instructions per loop * 256 loops = 768 instructions
+     decfsz    Delay2,f            ; In case of maximum voltage. The outer loop takes and additional 3 instructions per lap * 256 loops
      goto      A2DDelayLoop        ; (768+3) * 256 = 197376 instructions / 1M instructions per second = 0.197 sec or 197 ms
                                    ; call it two-tenths of a second.
 				   
