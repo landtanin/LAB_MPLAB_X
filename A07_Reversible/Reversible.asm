@@ -102,12 +102,12 @@ TenmSdelay:
      goto      TenmSdelay
 ; end TenmS
 
-
+; start rotate process
      btfsc     LookingFor,0
      goto      LookingFor1
 
 LookingFor0:
-     btfsc     PORTB,0        ; is the switch pressed (0)
+     btfsc     PORTB,0        ; is the switch pressed 
      goto      Rotate
      bsf       LookingFor,0   ; yes  Next we'll be looking for a 1
      movlw     0xFF           ; load the W register incase we need it
@@ -115,9 +115,10 @@ LookingFor0:
      goto      Rotate
 
 LookingFor1:
-     btfsc     PORTB,0        ; is the switch pressed (0)
+     btfsc     PORTB,0        ; is the switch pressed
      bcf       LookingFor,0
      
+; it normally rotate right (->01234567->)
 Rotate:
      bcf       STATUS,C       ; ensure the carry bit is clear
      btfss     Direction,0
