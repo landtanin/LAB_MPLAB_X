@@ -22,8 +22,8 @@ LastState			; what was the state before this pressing
 ;* initialisation     
 Start:
      bsf       STATUS,RP0          ; select Register Bank 1
-     movlw     0xFF
-     movwf     TRISA               ; Make PortA all input
+;     movlw     0xFF
+;     movwf     TRISA               ; Make PortA all input
 
      clrf      TRISD               ; Make PortD all output
 
@@ -31,8 +31,10 @@ Start:
      movwf     TRISB               ; Make RBO pin input (switch)
 
      bsf       STATUS,RP1          ; select Register Bank 3
-     movlw     0x1F                
-     movwf     ANSEL               ; PortA pins are all analog(0-4), PortE pins are digital(5-7)
+;     movlw     0x1F                
+;     movwf     ANSEL               ; PortA pins are all analog(0-4), PortE pins are digital(5-7)
+     ; why do we need to set PORTA if we do nothing with potentionmeter
+     
      movlw     0x00
      movwf     ANSELH              ; PortB pins are digitial (important as RB0 is switch)
      

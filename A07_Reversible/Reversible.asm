@@ -37,18 +37,21 @@ Start:
      movwf     TRISA          ; Make PortA all input
 
      movlw     0x01
-     movwf     TRISB          ; Make RB0 input
+     movwf     TRISB          ; Make RB0 input, only set the RB0 bit
 
      clrf      TRISD          ; Make PortD all output
 
 ;	init the ADC
      movlw     0x00           ; Left Justified, Vdd-Vss referenced
      movwf     ADCON1
+     
      bsf       STATUS,RP1     ; select Register Bank 3
      movlw     0xFF           ; we want all Port A pins Analog
      movwf     ANSEL
+     
      movlw     0x00
      movwf     ANSELH         ; PortB pins are digitial (important as RB0 is switch)
+     
      bcf       STATUS,RP0     ; back to Register Bank 0
      bcf       STATUS,RP1
      
@@ -77,11 +80,11 @@ MainLoop:
      nop                      ; wait 1uS
 
      bsf       ADCON0,GO_DONE ; start conversion
-     btfss     ADCON0,GO_DONE ; this bit will change to zero when the conversion is complete
+     btfss     ADCON0,GO_DONE ; this bit will change to zero when the conversion is complete ?????
      goto      $-1
 
-     movf      ADRESH,w       ; Copy the display to the LEDs
-     movwf     Delay2
+     movf      ADRESH,w       
+     movwf     Delay2	      ; *** this is how the potentiometer take control of the delay 
 
 A2DDelayLoop:
      incfsz    Delay1,f       ; Waste time.  
@@ -97,6 +100,8 @@ TenmSdelay:
      goto      TenmSdelay
      decfsz    Delay2,f
      goto      TenmSdelay
+; end TenmS
+
 
      btfsc     LookingFor,0
      goto      LookingFor1

@@ -1,4 +1,4 @@
-MPASM 5.68  /USERS/MAC/DOCUMENTS/LAB_MPLAB_X   11-8-2016  17:17:33         PAGE  1
+MPASM 5.68  /USERS/MAC/DOCUMENTS/LAB_MPLAB_X   11-9-2016  0:12:43         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -57,7 +57,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00026 
                       00027 ; starting address in the program memory for the following code
 0000                  00028      org 0
-MPASM 5.68  /USERS/MAC/DOCUMENTS/LAB_MPLAB_X   11-8-2016  17:17:33         PAGE  2
+MPASM 5.68  /USERS/MAC/DOCUMENTS/LAB_MPLAB_X   11-9-2016  0:12:43         PAGE  2
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -114,58 +114,62 @@ Message[302]: Register in operand not in bank 0.  Ensure that bank bits are corr
 0012   1822           00057      btfsc     LastStableState,0           ; if release (reads 1), not skip, goto LookingForUp
 0013   2819           00058      goto      LookingForUp                ; two different pieces of code for two switch states
                       00059 
-0014                  00060 LookingForDown:
-                      00061      ; clrw - clear W
-MPASM 5.68  /USERS/MAC/DOCUMENTS/LAB_MPLAB_X   11-8-2016  17:17:33         PAGE  3
+                      00060 ;----------CHECK BOUNCE???
+0014                  00061 LookingForDown:
+MPASM 5.68  /USERS/MAC/DOCUMENTS/LAB_MPLAB_X   11-9-2016  0:12:43         PAGE  3
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-0014   0103           00062      clrw                          ; assume it's not, so clear
-0015   1C06           00063      btfss     PORTB,RB0             ; wait for switch to go up
-0016   0A23           00064      incf      Counter,w           ; if it's low, bump the counter
-0017   00A3           00065      movwf     Counter             ; store either the 0 or incremented value
-0018   281D           00066      goto      EndDebounce
-                      00067      
-0019                  00068 LookingForUp:
-0019   0103           00069      clrw                          ; assume it's not, so clear
-001A   1806           00070      btfsc     PORTB,RB0             ; wait for switch to go low(pressed)
-001B   0A23           00071      incf      Counter,w
-001C   00A3           00072      movwf     Counter
-                      00073 
-001D                  00074 EndDebounce:
-001D   0823           00075      movf      Counter,w           ; have we seen 5 in a row?
-                      00076      ; xorlw - Exclusive OR literal with W
-                      00077      ; xor - same, 0, diff, 1
-001E   3A05           00078      xorlw     5
-001F   1D03           00079      btfss     STATUS,Z     
-0020   2828           00080      goto      Delay1mS
-                      00081      
-                      00082      ; comf - Complement f
-0021   09A2           00083      comf      LastStableState,f   ; after 5 straight, reverse the direction
-0022   01A3           00084      clrf      Counter             ; reset counter
-0023   1822           00085      btfsc     LastStableState,0   ; Was it a key-down press?
-0024   2828           00086      goto      Delay1mS            ; no: take no action
-                      00087      
-0025   0AA1           00088      incf      Display,f           ; if it's the down direction, 
-0026   0821           00089      movf      Display,w           ; take action on the switch
-0027   0088           00090      movwf     PORTD               ; (increment counter and put on display)
+                      00062      ; clrw - clear W
+0014   0103           00063      clrw                          ; assume it's not, so clear
+0015   1C06           00064      btfss     PORTB,RB0             ; wait for switch to go up
+0016   0A23           00065      incf      Counter,w           ; if it's low, bump the counter
+0017   00A3           00066      movwf     Counter             ; store either the 0 or incremented value
+0018   281D           00067      goto      EndDebounce
+                      00068      
+0019                  00069 LookingForUp:
+0019   0103           00070      clrw                          ; assume it's not, so clear
+001A   1806           00071      btfsc     PORTB,RB0             ; wait for switch to go low(pressed)
+001B   0A23           00072      incf      Counter,w
+001C   00A3           00073      movwf     Counter
+                      00074 
+                      00075 ;----------END CHECK BOUNCE
+001D                  00076 EndDebounce:
+001D   0823           00077      movf      Counter,w           ; have we seen 5 in a row?
+                      00078      ; xorlw - Exclusive OR literal with W
+                      00079      ; xor - same, 0, diff, 1
+001E   3A05           00080      xorlw     5
+001F   1D03           00081      btfss     STATUS,Z   ; Z = 1 if the result is zero,
+                      00082                           ; Z = 0 if the result is not zero.
+0020   2828           00083      goto      Delay1mS
+                      00084      
+                      00085      ; It will enter this loop only when counter=5
+                      00086      ; comf - Complement f
+0021   09A2           00087      comf      LastStableState,f   ; after 5 straight, reverse the direction TOGGLE!!!
+0022   01A3           00088      clrf      Counter             ; reset counter
+0023   1C22           00089      btfss     LastStableState,0   ; Was it a key-down press?
+0024   2828           00090      goto      Delay1mS            ; no: take no action
                       00091      
-0028                  00092 Delay1mS:
-0028   3047           00093      movlw     .71                 ; delay ~1000uS
-0029   00A0           00094      movwf     Delay
-002A   0BA0           00095      decfsz    Delay,f             ; this loop does 215 cycles
-002B   282A           00096      goto      $-1          
-002C   0BA0           00097      decfsz    Delay,f             ; This loop does 786 cycles
-002D   282C           00098      goto      $-1
-                      00099 
-002E   2812           00100      goto      MainLoop
-                      00101 ;* end of the superloop 
-                      00102 ;---------------------------------------------------------------------
+0025   0AA1           00092      incf      Display,f           ; if it's the down direction, 
+0026   0821           00093      movf      Display,w           ; take action on the switch
+0027   0088           00094      movwf     PORTD               ; (increment counter and put on display)
+                      00095      
+0028                  00096 Delay1mS:
+0028   3047           00097      movlw     .71                 ; delay ~1000uS
+0029   00A0           00098      movwf     Delay
+002A   0BA0           00099      decfsz    Delay,f             ; this loop does 215 cycles
+002B   282A           00100      goto      $-1          
+002C   0BA0           00101      decfsz    Delay,f             ; This loop does 786 cycles
+002D   282C           00102      goto      $-1
                       00103 
-                      00104      end
-MPASM 5.68  /USERS/MAC/DOCUMENTS/LAB_MPLAB_X   11-8-2016  17:17:33         PAGE  4
+002E   2812           00104      goto      MainLoop
+                      00105 ;* end of the superloop 
+                      00106 ;---------------------------------------------------------------------
+                      00107 
+                      00108      end
+MPASM 5.68  /USERS/MAC/DOCUMENTS/LAB_MPLAB_X   11-9-2016  0:12:43         PAGE  4
 
 
 SYMBOL TABLE
@@ -224,7 +228,7 @@ BRG6                              00000006
 BRG7                              00000007
 BRG8                              00000000
 BRG9                              00000001
-MPASM 5.68  /USERS/MAC/DOCUMENTS/LAB_MPLAB_X   11-8-2016  17:17:33         PAGE  5
+MPASM 5.68  /USERS/MAC/DOCUMENTS/LAB_MPLAB_X   11-9-2016  0:12:43         PAGE  5
 
 
 SYMBOL TABLE
@@ -283,7 +287,7 @@ CHS0                              00000002
 CHS1                              00000003
 CHS2                              00000004
 CHS3                              00000005
-MPASM 5.68  /USERS/MAC/DOCUMENTS/LAB_MPLAB_X   11-8-2016  17:17:33         PAGE  6
+MPASM 5.68  /USERS/MAC/DOCUMENTS/LAB_MPLAB_X   11-9-2016  0:12:43         PAGE  6
 
 
 SYMBOL TABLE
@@ -342,7 +346,7 @@ I2C_STOP                          00000004
 INDF                              00000000
 INTCON                            0000000B
 INTE                              00000004
-MPASM 5.68  /USERS/MAC/DOCUMENTS/LAB_MPLAB_X   11-8-2016  17:17:33         PAGE  7
+MPASM 5.68  /USERS/MAC/DOCUMENTS/LAB_MPLAB_X   11-9-2016  0:12:43         PAGE  7
 
 
 SYMBOL TABLE
@@ -401,7 +405,7 @@ OSFIE                             00000007
 OSFIF                             00000007
 OSTS                              00000003
 P                                 00000004
-MPASM 5.68  /USERS/MAC/DOCUMENTS/LAB_MPLAB_X   11-8-2016  17:17:33         PAGE  8
+MPASM 5.68  /USERS/MAC/DOCUMENTS/LAB_MPLAB_X   11-9-2016  0:12:43         PAGE  8
 
 
 SYMBOL TABLE
@@ -460,7 +464,7 @@ RB3                               00000003
 RB4                               00000004
 RB5                               00000005
 RB6                               00000006
-MPASM 5.68  /USERS/MAC/DOCUMENTS/LAB_MPLAB_X   11-8-2016  17:17:33         PAGE  9
+MPASM 5.68  /USERS/MAC/DOCUMENTS/LAB_MPLAB_X   11-9-2016  0:12:43         PAGE  9
 
 
 SYMBOL TABLE
@@ -519,7 +523,7 @@ SPBRGH                            0000009A
 SPEN                              00000007
 SR0                               00000006
 SR1                               00000007
-MPASM 5.68  /USERS/MAC/DOCUMENTS/LAB_MPLAB_X   11-8-2016  17:17:33         PAGE 10
+MPASM 5.68  /USERS/MAC/DOCUMENTS/LAB_MPLAB_X   11-9-2016  0:12:43         PAGE 10
 
 
 SYMBOL TABLE
@@ -578,7 +582,7 @@ TMR1IF                            00000000
 TMR1L                             0000000E
 TMR1ON                            00000000
 TMR2                              00000011
-MPASM 5.68  /USERS/MAC/DOCUMENTS/LAB_MPLAB_X   11-8-2016  17:17:33         PAGE 11
+MPASM 5.68  /USERS/MAC/DOCUMENTS/LAB_MPLAB_X   11-9-2016  0:12:43         PAGE 11
 
 
 SYMBOL TABLE
@@ -637,7 +641,7 @@ TUN0                              00000000
 TUN1                              00000001
 TUN2                              00000002
 TUN3                              00000003
-MPASM 5.68  /USERS/MAC/DOCUMENTS/LAB_MPLAB_X   11-8-2016  17:17:33         PAGE 12
+MPASM 5.68  /USERS/MAC/DOCUMENTS/LAB_MPLAB_X   11-9-2016  0:12:43         PAGE 12
 
 
 SYMBOL TABLE
@@ -696,7 +700,7 @@ _BOR4V_BOR40V                     00003FFF
 _BOREN_NSLEEP                     00003EFF
 _BOREN_OFF                        00003CFF
 _BOREN_ON                         00003FFF
-MPASM 5.68  /USERS/MAC/DOCUMENTS/LAB_MPLAB_X   11-8-2016  17:17:33         PAGE 13
+MPASM 5.68  /USERS/MAC/DOCUMENTS/LAB_MPLAB_X   11-9-2016  0:12:43         PAGE 13
 
 
 SYMBOL TABLE
@@ -755,7 +759,7 @@ _WDT_OFF                          00003FF7
 _WDT_ON                           00003FFF
 _WRT_1FOURTH                      00003BFF
 _WRT_256                          00003DFF
-MPASM 5.68  /USERS/MAC/DOCUMENTS/LAB_MPLAB_X   11-8-2016  17:17:33         PAGE 14
+MPASM 5.68  /USERS/MAC/DOCUMENTS/LAB_MPLAB_X   11-9-2016  0:12:43         PAGE 14
 
 
 SYMBOL TABLE
