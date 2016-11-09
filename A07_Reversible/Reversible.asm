@@ -80,7 +80,7 @@ MainLoop:
      nop                      ; wait 1uS
 
      bsf       ADCON0,GO_DONE ; start conversion
-     btfss     ADCON0,GO_DONE ; this bit will change to zero when the conversion is complete ?????
+     btfss     ADCON0,GO_DONE ; this bit will change to zero when the conversion is complete ????? shouldn't it be btfsc??? exit the loop when it is zero
      goto      $-1
 
      movf      ADRESH,w       
@@ -89,7 +89,7 @@ MainLoop:
 A2DDelayLoop:
      incfsz    Delay1,f       ; Waste time.  
      goto      A2DDelayLoop   ; The Inner loop takes 3 instructions per loop * 256 loopss = 768 instructions
-     incfsz    Delay2,f       ; The outer loop takes and additional 3 instructions per lap * 256 loops
+     incfsz    Delay2,f       ; Depend on potentiometer input values. For the maximum case : The outer loop takes and additional 3 instructions per lap * 256 loops
      goto      A2DDelayLoop   ; (768+3) * 256 = 197376 instructions / 1M instructions per second = 0.197 sec.
                               ; call it a two-tenths of a second.
 

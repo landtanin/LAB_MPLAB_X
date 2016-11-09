@@ -1,4 +1,4 @@
-MPASM 5.68  /USERS/MAC/DOCUMENTS/LAB_MPLAB_X   11-8-2016  18:14:11         PAGE  1
+MPASM 5.68  /USERS/MAC/DOCUMENTS/LAB_MPLAB_X   11-9-2016  1:10:58         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -57,7 +57,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00018 ; _CPD_OFF - data code protection - OFF
                       00019 ; _BOR_OFF - brown out reset - OFF
                       00020 ; _IESO_OFF - internal external oscillator switchover - DISABLED
-MPASM 5.68  /USERS/MAC/DOCUMENTS/LAB_MPLAB_X   11-8-2016  18:14:11         PAGE  2
+MPASM 5.68  /USERS/MAC/DOCUMENTS/LAB_MPLAB_X   11-9-2016  1:10:58         PAGE  2
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -116,7 +116,7 @@ Message[302]: Register in operand not in bank 0.  Ensure that bank bits are corr
 000F   3041           00058      movlw     0x41
 0010   009F           00059      movwf     ADCON0         ; configure A2D for Fosc/8, Channel 0 (RA0), and turn on the A2D module
                       00060  
-MPASM 5.68  /USERS/MAC/DOCUMENTS/LAB_MPLAB_X   11-8-2016  18:14:11         PAGE  3
+MPASM 5.68  /USERS/MAC/DOCUMENTS/LAB_MPLAB_X   11-9-2016  1:10:58         PAGE  3
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -144,7 +144,8 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 001B   0000           00080      nop                      ; wait 1uS
                       00081 
 001C   149F           00082      bsf       ADCON0,GO_DONE ; start conversion
-001D   1C9F           00083      btfss     ADCON0,GO_DONE ; this bit will change to zero when the conversion is complete ?????
+001D   1C9F           00083      btfss     ADCON0,GO_DONE ; this bit will change to zero when the conversion is complete ????? shoul
+                            dn't it be btfsc??? exit the loop when it is zero
 001E   281D           00084      goto      $-1
                       00085 
 001F   081E           00086      movf      ADRESH,w       
@@ -154,7 +155,8 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0021   0FA0           00090      incfsz    Delay1,f       ; Waste time.  
 0022   2821           00091      goto      A2DDelayLoop   ; The Inner loop takes 3 instructions per loop * 256 loopss = 768 instruct
                             ions
-0023   0FA1           00092      incfsz    Delay2,f       ; The outer loop takes and additional 3 instructions per lap * 256 loops
+0023   0FA1           00092      incfsz    Delay2,f       ; Depend on potentiometer input values. For the maximum case : The outer l
+                            oop takes and additional 3 instructions per lap * 256 loops
 0024   2821           00093      goto      A2DDelayLoop   ; (768+3) * 256 = 197376 instructions / 1M instructions per second = 0.197
                              sec.
                       00094                               ; call it a two-tenths of a second.
@@ -173,14 +175,14 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 002C   2833           00107      goto      LookingFor1
                       00108 
 002D                  00109 LookingFor0:
-002D   1806           00110      btfsc     PORTB,0        ; is the switch pressed (0)
-002E   2835           00111      goto      Rotate
-MPASM 5.68  /USERS/MAC/DOCUMENTS/LAB_MPLAB_X   11-8-2016  18:14:11         PAGE  4
+MPASM 5.68  /USERS/MAC/DOCUMENTS/LAB_MPLAB_X   11-9-2016  1:10:58         PAGE  4
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
+002D   1806           00110      btfsc     PORTB,0        ; is the switch pressed (0)
+002E   2835           00111      goto      Rotate
 002F   1424           00112      bsf       LookingFor,0   ; yes  Next we'll be looking for a 1
 0030   30FF           00113      movlw     0xFF           ; load the W register incase we need it
 0031   06A3           00114      xorwf     Direction,f    ; yes, flip the direction bit
@@ -211,7 +213,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00139 ;-------------------------------------------------------------
                       00140     
                       00141      end
-MPASM 5.68  /USERS/MAC/DOCUMENTS/LAB_MPLAB_X   11-8-2016  18:14:11         PAGE  5
+MPASM 5.68  /USERS/MAC/DOCUMENTS/LAB_MPLAB_X   11-9-2016  1:10:58         PAGE  5
 
 
 SYMBOL TABLE
@@ -270,7 +272,7 @@ BRG5                              00000005
 BRG6                              00000006
 BRG7                              00000007
 BRG8                              00000000
-MPASM 5.68  /USERS/MAC/DOCUMENTS/LAB_MPLAB_X   11-8-2016  18:14:11         PAGE  6
+MPASM 5.68  /USERS/MAC/DOCUMENTS/LAB_MPLAB_X   11-9-2016  1:10:58         PAGE  6
 
 
 SYMBOL TABLE
@@ -329,7 +331,7 @@ CCPR2L                            0000001B
 CHS0                              00000002
 CHS1                              00000003
 CHS2                              00000004
-MPASM 5.68  /USERS/MAC/DOCUMENTS/LAB_MPLAB_X   11-8-2016  18:14:11         PAGE  7
+MPASM 5.68  /USERS/MAC/DOCUMENTS/LAB_MPLAB_X   11-9-2016  1:10:58         PAGE  7
 
 
 SYMBOL TABLE
@@ -388,7 +390,7 @@ I2C_STOP                          00000004
 INDF                              00000000
 INTCON                            0000000B
 INTE                              00000004
-MPASM 5.68  /USERS/MAC/DOCUMENTS/LAB_MPLAB_X   11-8-2016  18:14:11         PAGE  8
+MPASM 5.68  /USERS/MAC/DOCUMENTS/LAB_MPLAB_X   11-9-2016  1:10:58         PAGE  8
 
 
 SYMBOL TABLE
@@ -447,7 +449,7 @@ OSFIE                             00000007
 OSFIF                             00000007
 OSTS                              00000003
 P                                 00000004
-MPASM 5.68  /USERS/MAC/DOCUMENTS/LAB_MPLAB_X   11-8-2016  18:14:11         PAGE  9
+MPASM 5.68  /USERS/MAC/DOCUMENTS/LAB_MPLAB_X   11-9-2016  1:10:58         PAGE  9
 
 
 SYMBOL TABLE
@@ -506,7 +508,7 @@ RB3                               00000003
 RB4                               00000004
 RB5                               00000005
 RB6                               00000006
-MPASM 5.68  /USERS/MAC/DOCUMENTS/LAB_MPLAB_X   11-8-2016  18:14:11         PAGE 10
+MPASM 5.68  /USERS/MAC/DOCUMENTS/LAB_MPLAB_X   11-9-2016  1:10:58         PAGE 10
 
 
 SYMBOL TABLE
@@ -565,7 +567,7 @@ SENDB                             00000003
 SMP                               00000007
 SPBRG                             00000099
 SPBRGH                            0000009A
-MPASM 5.68  /USERS/MAC/DOCUMENTS/LAB_MPLAB_X   11-8-2016  18:14:11         PAGE 11
+MPASM 5.68  /USERS/MAC/DOCUMENTS/LAB_MPLAB_X   11-9-2016  1:10:58         PAGE 11
 
 
 SYMBOL TABLE
@@ -624,7 +626,7 @@ TMR1GE                            00000006
 TMR1H                             0000000F
 TMR1IE                            00000000
 TMR1IF                            00000000
-MPASM 5.68  /USERS/MAC/DOCUMENTS/LAB_MPLAB_X   11-8-2016  18:14:11         PAGE 12
+MPASM 5.68  /USERS/MAC/DOCUMENTS/LAB_MPLAB_X   11-9-2016  1:10:58         PAGE 12
 
 
 SYMBOL TABLE
@@ -683,7 +685,7 @@ TRISE2                            00000002
 TRISE3                            00000003
 TRMT                              00000001
 TUN0                              00000000
-MPASM 5.68  /USERS/MAC/DOCUMENTS/LAB_MPLAB_X   11-8-2016  18:14:11         PAGE 13
+MPASM 5.68  /USERS/MAC/DOCUMENTS/LAB_MPLAB_X   11-9-2016  1:10:58         PAGE 13
 
 
 SYMBOL TABLE
@@ -742,7 +744,7 @@ Z                                 00000002
 _BOR21V                           00003EFF
 _BOR40V                           00003FFF
 _BOR4V_BOR21V                     00003EFF
-MPASM 5.68  /USERS/MAC/DOCUMENTS/LAB_MPLAB_X   11-8-2016  18:14:11         PAGE 14
+MPASM 5.68  /USERS/MAC/DOCUMENTS/LAB_MPLAB_X   11-9-2016  1:10:58         PAGE 14
 
 
 SYMBOL TABLE
@@ -801,7 +803,7 @@ _PWRTE_OFF                        00003FFF
 _PWRTE_ON                         00003FEF
 _WDTE_OFF                         00003FF7
 _WDTE_ON                          00003FFF
-MPASM 5.68  /USERS/MAC/DOCUMENTS/LAB_MPLAB_X   11-8-2016  18:14:11         PAGE 15
+MPASM 5.68  /USERS/MAC/DOCUMENTS/LAB_MPLAB_X   11-9-2016  1:10:58         PAGE 15
 
 
 SYMBOL TABLE
